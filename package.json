@@ -1,0 +1,19 @@
+{
+  "name": "airbnbathroom",
+  "version": "1.0.0",
+  "description": "Airbnb but for bathrooms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myoniles/airbnbathroom.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myoniles/airbnbathroom/issues"
+  },
+  "homepage": "https://github.com/myoniles/airbnbathroom#readme"
+}

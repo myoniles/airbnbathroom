@@ -1,0 +1,19 @@
+/*
+* Default style sheet for airbnbathroom
+*
+* COLORS:
+* Background brown: #AD937D
+* text color: #FFF
+*
+*/
+
+
+html, body {
+	height: 100%;
+	background-color: #AD937D;
+	color: #FFF;
+}
+
+#map {
+	height: 100%;
+}

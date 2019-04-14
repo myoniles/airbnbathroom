@@ -6,11 +6,8 @@ var Br_Model = new Schema({
 		type: String,
 		required: true
 	},
-	loc: {
-		type: String,
-		// TODO add google maps integration to current location
-		default: "0,0"
-	},
+	lat: {type:Number, required: true},
+	lng: {type:Number, required: true},
 	gender: { type: String, default:'Not Specified'},
 	open_t: Number,
 	close_t: Number,

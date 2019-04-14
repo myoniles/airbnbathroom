@@ -16,4 +16,4 @@ routes(app)
 
 app.listen(port);
 
-console.log('API launched on port' + port)
+console.log('API launched on port ' + port)

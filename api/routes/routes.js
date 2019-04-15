@@ -18,13 +18,13 @@ module.exports = function(app) {
 		});
 
 	// Routes for a specific bathroom
-	app.route('/bathroom:brId')
+	app.route('/bathroom/:brId')
 		.get(bnbr_controller.get_br_info)
 		.put(bnbr_controller.edit_br)
 		.delete(bnbr_controller.delete_br);
 
 	// route for abathroom creation
-	app.route('/bathroom')
+	app.route('/bathrooms')
 		.get(bnbr_controller.get_all_br_info)
 		.post(bnbr_controller.register_br);
 

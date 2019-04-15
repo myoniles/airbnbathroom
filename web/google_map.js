@@ -27,3 +27,14 @@ function place_bathroom( br_obj, map_obj){
 	});
 }
 
+function get_all_br(){
+	var request = new XMLHTTPRequest();
+	request.open('GET','localhost:3000/bathrooms/', true);
+	request.onload = function(){
+		console.log(request.response);
+		for ( var i = 0; i < request.response.length(); i++){
+			place_bathroom(item, map_obj);
+		}
+	}
+	request.send();
+}

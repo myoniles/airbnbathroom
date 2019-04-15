@@ -5,14 +5,16 @@ function initMap() {
 		center: {lat: 40.426554, lng: -86.914252},
 		zoom: 15
 	});
-	test= {name:'test', loc:'40.42,-86.92'};
+	test= {name:'test', lat: 40.42655, lng: -86.913252};
 	place_bathroom(test, map);
+	get_all_br(map);
 }
 
 function place_bathroom( br_obj, map_obj){
-	loc_arr = br_obj.loc.split(',')
+	console.log(br_obj)
+	//loc_arr = br_obj.loc.split(',')
 	var marker = new google.maps.Marker({
-		position:{lat:Number(loc_arr[0]), lng:Number(loc_arr[1])},
+		position:{lat:br_obj.lat, lng:br_obj.lng},
 		map:map_obj
 	});
 	content_str = '<div class="markerWindow">'
@@ -27,13 +29,16 @@ function place_bathroom( br_obj, map_obj){
 	});
 }
 
-function get_all_br(){
-	var request = new XMLHTTPRequest();
-	request.open('GET','localhost:3000/bathrooms/', true);
+function get_all_br( map_obj ){
+	var request = new XMLHttpRequest();
+	request.open('GET','/bathrooms/', true);
 	request.onload = function(){
 		console.log(request.response);
-		for ( var i = 0; i < request.response.length(); i++){
-			place_bathroom(item, map_obj);
+		a = JSON.parse(request.responseText);
+		console.log(a);
+		for ( var i = 0; i < a.length; i++){
+			console.log(a[i]);
+			place_bathroom(a[i], map_obj);
 		}
 	}
 	request.send();

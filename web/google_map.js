@@ -3,23 +3,40 @@ var map;
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'),{
 		center: {lat: 40.426554, lng: -86.914252},
-		zoom: 15
+		zoom: 16
 	});
-	test= {name:'test', lat: 40.42655, lng: -86.913252};
-	place_bathroom(test, map);
 	get_all_br(map);
+}
+
+function generate_marker_html( br_obj ){
+	content_str = '<div class="markerWindow">'
+		+'<h3>'+br_obj.name+'</h3>';
+		if( br_obj.stars != 0 ){
+			content_str = content_str+ '<p>'
+			+ br_obj.stars + ' stars'
+			+ '</p>'
+		}
+		if( br_obj.tp_ply != null ){
+			content_str = content_str+ '<p>'
+			+'Toilet Paper Ply: '+ br_obj.tp_ply
+			+ '</p>'
+		}
+		if( br_obj.diaper != null ){
+			content_str = content_str+ '<p>'
+			+ 'Diaper Changing Station'
+			+ '</p>'
+		}
+		content_str += '</div>';
+	return content_str
 }
 
 function place_bathroom( br_obj, map_obj){
 	console.log(br_obj)
-	//loc_arr = br_obj.loc.split(',')
 	var marker = new google.maps.Marker({
 		position:{lat:br_obj.lat, lng:br_obj.lng},
 		map:map_obj
 	});
-	content_str = '<div class="markerWindow">'
-		+'<h3>'+br_obj.name+'</h3>'
-		+'</div>';
+	content_str = generate_marker_html(br_obj);
 	var info_window = new google.maps.InfoWindow({
 		content: content_str
 	});

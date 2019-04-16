@@ -14,7 +14,34 @@
 		<hr><hr>
 		<div id="map"></div>
 		<div class="menu">
-			<p>darn</p>
+			<h3>Search</h3>
+			<form>
+				<p>Minimum stars:
+				<select>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select></p>
+				<p>Gender:
+					Male: <input type="checkbox" name="gender" value="Male">
+					Female: <input type="checkbox" name="gender" value="Female">
+					Gender Neutral: <input type="checkbox" name="gender" value="Gender Neutral">
+				</p>
+				<p>Has a Diaper changing station: yes: <input name= 'diaper' value='true' type="radio"> no: <input name= 'diaper' value='false' type="radio"></p>
+				<input type="submit" value="Refine Search">
+			</form><hr>
+			<h3>Add New Bathroom</h3>
+			<form>
+				<p>Gender:
+					Male: <input type="checkbox" name="gender" value="Male">
+					Female: <input type="checkbox" name="gender" value="Female">
+					Gender Neutral: <input type="checkbox" name="gender" value="Gender Neutral">
+				</p>
+				<p>Has a Diaper changing station: yes: <input name= 'diaper' value='true' type="radio"> no: <input name= 'diaper' value='false' type="radio"></p>
+				<input type="submit" value="Add Bathroom at current marker location">
+			</form><hr>
 		</div>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9HKstTbYigEqf8DNuKn447R1BaDfcSb4&callback=initMap"></script>
 	</body>

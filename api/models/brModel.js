@@ -4,10 +4,11 @@ var Schema = mongoose.Schema;
 var Br_Model = new Schema({
 	name: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
-	lat: {type:Number, required: true},
-	lng: {type:Number, required: true},
+	lat: {type:Number, required: true, unique: true, dropDups: true},
+	lng: {type:Number, required: true, unique: true, dropDups: true},
 	gender: { type: String, default:'Not Specified'},
 	open_t: Number,
 	close_t: Number,

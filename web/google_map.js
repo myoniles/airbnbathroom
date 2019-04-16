@@ -1,4 +1,5 @@
-var map;
+var user_placed_marker = null;
+var gm_markers = [];
 
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'),{
@@ -6,6 +7,30 @@ function initMap() {
 		zoom: 16
 	});
 	get_all_br(map);
+
+	map.addListener('click', function(event){
+		if (user_placed_marker != null)
+			user_placed_marker.setMap(null);
+		user_placed_marker = new google.maps.Marker({
+			position: event.latLng,
+			map: map,
+		});
+	});
+}
+
+function getUrlVars() {
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		if (vars[key] != undefined)
+			vars[key] = vars[key] + " " + value
+		else
+			vars[key] = value;
+	});
+	return vars;
+}
+
+function send_br_data(){
+
 }
 
 function generate_marker_html( br_obj ){
@@ -21,7 +46,7 @@ function generate_marker_html( br_obj ){
 			+'Toilet Paper Ply: '+ br_obj.tp_ply
 			+ '</p>'
 		}
-		if( br_obj.diaper != null ){
+		if( br_obj.diaper == true ){
 			content_str = content_str+ '<p>'
 			+ 'Diaper Changing Station'
 			+ '</p>'
@@ -31,10 +56,10 @@ function generate_marker_html( br_obj ){
 }
 
 function place_bathroom( br_obj, map_obj){
-	console.log(br_obj)
 	var marker = new google.maps.Marker({
 		position:{lat:br_obj.lat, lng:br_obj.lng},
-		map:map_obj
+		map:map_obj,
+		icon: '/toilets_inclusive.png'
 	});
 	content_str = generate_marker_html(br_obj);
 	var info_window = new google.maps.InfoWindow({
@@ -48,13 +73,10 @@ function place_bathroom( br_obj, map_obj){
 
 function get_all_br( map_obj ){
 	var request = new XMLHttpRequest();
-	request.open('GET','/bathrooms/', true);
+	request.open('GET','/bathrooms_all/', true);
 	request.onload = function(){
-		console.log(request.response);
 		a = JSON.parse(request.responseText);
-		console.log(a);
 		for ( var i = 0; i < a.length; i++){
-			console.log(a[i]);
 			place_bathroom(a[i], map_obj);
 		}
 	}

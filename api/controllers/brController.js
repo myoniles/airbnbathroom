@@ -28,6 +28,15 @@ exports.get_all_br_info = function(req, res) {
 	});
 };
 
+exports.search_br = function(req, res) {
+	Br_Model.find(req.body, function(err, post){
+		if (err)
+			res.send(err);
+		res.json(post);
+	});
+};
+
+
 exports.edit_br = function(req, res) {
 	Br_Model.findOneAndUpdate({_id: req.params.brId}, req.body, {new: true}, function(err, br){
 		if (err)

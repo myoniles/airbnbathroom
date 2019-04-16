@@ -16,6 +16,11 @@ module.exports = function(app) {
 		.get( function(req, res){
 			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/style.css');
 		});
+	app.route('/toilets_inclusive.png')
+		.get( function(req, res){
+			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/toilets_inclusive.png');
+		});
+
 
 	// Routes for a specific bathroom
 	app.route('/bathroom/:brId')
@@ -25,7 +30,9 @@ module.exports = function(app) {
 
 	// route for abathroom creation
 	app.route('/bathrooms')
-		.get(bnbr_controller.get_all_br_info)
 		.post(bnbr_controller.register_br);
 
+	app.route('/bathrooms_all')
+		.get(bnbr_controller.get_all_br_info)
+		.post(bnbr_controller.search_br)
 }

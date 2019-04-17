@@ -29,9 +29,6 @@ function getUrlVars() {
 	return vars;
 }
 
-function send_br_data(){
-
-}
 
 function generate_marker_html( br_obj ){
 	content_str = '<div class="markerWindow">'
@@ -73,12 +70,18 @@ function place_bathroom( br_obj, map_obj){
 
 function get_all_br( map_obj ){
 	var request = new XMLHttpRequest();
-	request.open('GET','/bathrooms_all/', true);
+	request.open('POST','/bathrooms_all/', true);
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	request.onload = function(){
 		a = JSON.parse(request.responseText);
 		for ( var i = 0; i < a.length; i++){
 			place_bathroom(a[i], map_obj);
 		}
 	}
-	request.send();
+	args = window.location.href.split('?')
+	if ( args.length > 1)
+		request.send(args[1]);
+	else
+		request.send();
+	console.log(args)
 }

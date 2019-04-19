@@ -2,9 +2,37 @@ var user_placed_marker = null;
 var gm_markers = [];
 
 function initMap() {
+	var center_loc = {lat: 40.426554, lng: -86.914252};
+	var zoom_init = 16;
+	args = window.location.href.split('id=')
+	if (args.length > 1){
+		// we have an argument passed, if it is an ID,
+		// we should update the initial values
+		var request = new XMLHttpRequest();
+		request.open('GET','/bathroom/'+args[1], true);
+		//request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		request.onload = function(){
+			a = JSON.parse(request.responseText);
+			console.log(a);
+			//center_loc.lat = a.lat;
+			//center_loc.lng = a.lng;
+			var center_loc= { lat:a.lat, lng: a.lng};
+			var zoom_init = 18;
+			map = new google.maps.Map(document.getElementById('map'),{
+			center: center_loc,
+			zoom: zoom_init
+			})
+			place_bathroom( a, map);
+		}
+		request.send();
+		return;
+	}
+	console.log(center_loc)
+	console.log(zoom_init)
+
 	map = new google.maps.Map(document.getElementById('map'),{
-		center: {lat: 40.426554, lng: -86.914252},
-		zoom: 16
+		center: center_loc,
+		zoom: zoom_init
 	});
 	get_all_br(map);
 
@@ -18,21 +46,11 @@ function initMap() {
 	});
 }
 
-function getUrlVars() {
-	var vars = {};
-	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-		if (vars[key] != undefined)
-			vars[key] = vars[key] + " " + value
-		else
-			vars[key] = value;
-	});
-	return vars;
-}
-
-
 function generate_marker_html( br_obj ){
 	content_str = '<div class="markerWindow">'
+		+'<a href=\"/br.html?id=' + br_obj._id + '\">'
 		+'<h3>'+br_obj.name+'</h3>';
+		+ '</a>';
 		if( br_obj.stars != 0 ){
 			content_str = content_str+ '<p>'
 			+ br_obj.stars + ' stars'

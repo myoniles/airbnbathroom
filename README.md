@@ -19,8 +19,6 @@ As of the planning stage, I intend to use nodejs, angular?, the google maps api,
 
 ## Current
 
-## In Progress
-
 - Posting of bathrooms
 	- Track:
 		- hours of operation
@@ -28,11 +26,17 @@ As of the planning stage, I intend to use nodejs, angular?, the google maps api,
 		- Diaper station
 		- Toilet paper ply
 		- Social Obligation to use
-			- Free, Expected to Pay, Required to Pay, Private
+
+- Google Maps integration
+	- with search criteria
+
+## In Progress
+
+- Posting of bathrooms
 	- Rating and reviews of bathrooms
 		- Rating on a 5 star scale
 		- Comment of 140 characters
-	- Combine at a building level?
+	- ~~Combine at a building level?~~
 
 - User Accounts?
 	- Username

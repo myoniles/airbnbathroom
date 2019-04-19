@@ -8,6 +8,10 @@ module.exports = function(app) {
 		.get( function(req, res){
 			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/index.html');
 		});
+	app.route('/br.html')
+		.get( function(req, res){
+			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/br.html');
+		});
 	app.route('/google_map.js')
 		.get( function(req, res){
 			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/google_map.js');

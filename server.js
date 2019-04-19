@@ -3,6 +3,7 @@ var express = require('express'),
 	port = 3000
 	mongoose = require('mongoose')
 	Br_model = require('./api/models/brModel')
+	User_model = require('./api/models/userModel')
 	bodyParser = require('body-parser')
 
 mongoose.Promise = global.Promise

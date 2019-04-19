@@ -36,7 +36,13 @@ module.exports = function(app) {
 	app.route('/bathrooms')
 		.post(bnbr_controller.register_br);
 
+	// interacting with all br objects
 	app.route('/bathrooms_all')
 		.get(bnbr_controller.get_all_br_info)
 		.post(bnbr_controller.search_br)
+
+	// comments
+	app.route('/bathroom/:brId/comments')
+		.get(bnbr_controller.get_comments)
+		.put(bnbr_controller.post_a_comment)
 }

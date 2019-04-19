@@ -55,3 +55,24 @@ exports.delete_br = function(req, res) {
 			res.json({ message: 'Bathroom successfully deleted'})
 	});
 };
+
+
+exports.get_comments = function(req, res){
+	Br_Model.find(req.body, function(err, post){
+		if (err)
+			res.send(err);
+		res.json(post.comments);
+	});
+};
+
+exports.post_a_comment = function(req, res){
+	Br_Model.find(req.body, function(err, post){
+		if (err)
+			res.send(err);
+		potential_c = req.params
+		if (potential_c.stars > 5 || potential_c.stars < 1)
+			res.json(null);
+		post.comments.append(potential_c);
+		res.json(post.comments);
+	});
+};

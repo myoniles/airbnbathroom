@@ -12,7 +12,19 @@
 		<center><h1>AirBNBathroom</h1></center>
 		<hr><hr>
 		<div id="map" height=50%></div>
-		<div class="menu" height=50%>
+		<script>
+			args = window.location.href.split('id=')
+			if (args.length > 1){
+				gen_info( args[1]);
+			}
+		</script>
+		<div id="info" >
+			<div id="br_info">
+			<p>This bathroom does not exist partner</p>
+			</div>
+			<div id="comments">
+				ayy lmao
+			</div>
 		</div>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9HKstTbYigEqf8DNuKn447R1BaDfcSb4&callback=initMap"></script>
 	</body>

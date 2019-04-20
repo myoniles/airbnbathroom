@@ -10,12 +10,9 @@ function initMap() {
 		// we should update the initial values
 		var request = new XMLHttpRequest();
 		request.open('GET','/bathroom/'+args[1], true);
-		//request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		request.onload = function(){
 			a = JSON.parse(request.responseText);
 			console.log(a);
-			//center_loc.lat = a.lat;
-			//center_loc.lng = a.lng;
 			var center_loc= { lat:a.lat, lng: a.lng};
 			var zoom_init = 18;
 			map = new google.maps.Map(document.getElementById('map'),{
@@ -49,7 +46,7 @@ function initMap() {
 function generate_marker_html( br_obj ){
 	content_str = '<div class="markerWindow">'
 		+'<a href=\"/br.html?id=' + br_obj._id + '\">'
-		+'<h3>'+br_obj.name+'</h3>';
+		+'<h3>'+br_obj.name+'</h3>'
 		+ '</a>';
 		if( br_obj.stars != 0 ){
 			content_str = content_str+ '<p>'
@@ -84,6 +81,53 @@ function place_bathroom( br_obj, map_obj){
 	marker.addListener('click', function(){
 		info_window.open(map_obj, marker);
 	});
+}
+
+function gen_info( id ){
+	var request = new XMLHttpRequest();
+	request.open('GET','/bathroom/'+id, true);
+	request.onload = function(){
+		console.log(request.responseText);
+		br_obj = JSON.parse(request.responseText);
+		info_obj = document.getElementById("info")
+
+		// add the needed information
+		// build the info string
+		info_str = "<h2>" + br_obj.name+'</h2>';
+		if( br_obj.stars != 0 ){
+			info_str = info_str+ '<p>'
+			+ br_obj.stars + ' stars'
+			+ '</p>'
+		}
+		if( br_obj.tp_ply != null ){
+			info_str = info_str+ '<p>'
+			+'Toilet Paper Ply: '+ br_obj.tp_ply
+			+ '</p>'
+		}
+		if( br_obj.diaper == true ){
+			info_str = info_str+ '<p>'
+			+ 'Diaper Changing Station'
+			+ '</p>'
+		}
+		// append to the document
+		info_obj.children.br_info.innerHTML = info_str;
+
+		// add the comments
+		if (br_obj.comments.length ==0 ){
+			info_obj.children.comments.innerHTML = '<p>Sorry, No Comments Here!</p>'
+		} else {
+			for (var i = 0; i < br_obj.comments.length; i++){
+				// build the div
+				// append to the document
+				comment_div = document.createElement('div');
+				comment_div.className = 'comment';
+				commenthtml = '<p color=#1e1e1e> heck' + '</p>'
+			}
+		}
+
+	}
+	request.send();
+	return;
 }
 
 function get_all_br( map_obj ){

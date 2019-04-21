@@ -22,23 +22,23 @@ exports.login = function(req, res) {
 		if (err)
 			res.send(err);
 
-		console.log(req)
+		console.log(req.body)
 		// first look up username
-		User_model.findOne({username: req.headers.username}, function(err, post){
+		User_model.findOne({username: req.body.username}, function(err, post){
 			if (err)
 				res.send(err);
 			//res.json({response:true});
-				if (post == null){
-					res.json({response:false, reason:'user not found'})
-				}
-				bcrypt.compare(req.headers.password, post.password, function(err, hash){
-					if(err)
-						res.send(err)
-					if(hash)
-						res.json({resposne:true, cookie:post._id})
-					else
-						res.json({resposne:false})
-				});
+			if (post == null){
+				res.json({response:false})
+			}
+			bcrypt.compare(req.body.password, post.password, function(err, hash){
+				if(err)
+					res.send(err)
+				if(hash)
+					res.json({response:true, cookie:post._id, usern:req.body.username})
+				else
+					res.json({response:false})
 			});
+		});
 	});
 };

@@ -13,9 +13,11 @@ function getCookie(cname) {
 	return "";
 }
 
+
 function login_prompt(){
 	var inner ="";
-	var user = getCookie("username");
+	var user = getCookie("auth");
+	var name = getCookie("username");
 	if ( user == ""){
 		inner = "<form>"
 			+"<h3>User Account</h3>"
@@ -27,7 +29,7 @@ function login_prompt(){
 			+"<input type=\"button\" onclick=\"create_user()\" value=\"Create Account\">"
 		+"</form><br>";
 	} else {
-		inner = "<p>Hello, " + user + "<p/>";
+		inner = "<p>Hello, " + name + "<p/>";
 	}
 	document.getElementById("login").innerHTML = inner;
 }
@@ -50,19 +52,22 @@ function login(){
 	var usern = document.getElementById("username_entry").value;
 	var passwd = document.getElementById("password_entry").value;
 	var request = new XMLHttpRequest();
-	request.open('GET','/users/', true);
+	request.open('PUT','/users/', true);
 	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	request.setRequestHeader('username', usern);
-	request.setRequestHeader('password', passwd);
 	request.onload = function(){
 		r = JSON.parse(request.responseText);
-		if (r.response){
+		console.log(r);
+		if (r.response == true){
 			// create a cookie
-			console.log(reponse)
+			console.log(r)
+			document.cookie="auth="+r.cookie+";username="+r.usern+";";
+			document.cookie="username="+r.usern+";";
+			window.location.reload(true);
 		} else {
 			document.getElementById("username_entry").style.backgroundColor = "red";
 			document.getElementById("password_entry").style.backgroundColor = "red";
 		}
 	}
-	request.send();
+	args= "username="+usern+"&password="+passwd
+	request.send(args);
 }

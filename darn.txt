@@ -1,3 +1,0 @@
-API launched on port 3000
-{ username: 'myon', password: 'heck' }
-{ username: 'myon', password: 'heck' }

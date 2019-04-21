@@ -9,8 +9,9 @@ exports.register_user = function(req, res) {
 	var new_user = new User_model(req.body);
 	new_user.save(function(err,post){
 		if (err)
-			res.send(err);
-		res.json(post);
+			res.json({response: false});
+		else
+			res.json({response: true, cookie:post._id, usern: post.username});
 	});
 };
 
@@ -27,9 +28,9 @@ exports.login = function(req, res) {
 		User_model.findOne({username: req.body.username}, function(err, post){
 			if (err)
 				res.send(err);
-			//res.json({response:true});
-			if (post == null){
+			if (!post || post == null){
 				res.json({response:false})
+				return;
 			}
 			bcrypt.compare(req.body.password, post.password, function(err, hash){
 				if(err)

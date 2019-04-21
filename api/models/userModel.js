@@ -39,4 +39,6 @@ User_Model.pre('save', function(next) {
 	});
 });
 
+mongoose.model('User_Model', User_Model).createIndexes();
+
 module.exports = mongoose.model('User_Model', User_Model);

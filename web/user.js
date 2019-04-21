@@ -24,7 +24,7 @@ function login_prompt(){
 			+"Username<br>"
 			+"<input type=\"text\" id=\"username_entry\" name=\"username\" maxlength=20>"
 			+"<br>Password<br>"
-			+"<input type=\"text\" id=\"password_entry\" name=\"password\" maxlength=20><br>"
+			+"<input type=\"password\" id=\"password_entry\" name=\"password\" maxlength=20><br>"
 			+"<input type=\"button\" onclick=\"login()\" value=\"Log in\">"
 			+"<input type=\"button\" onclick=\"create_user()\" value=\"Create Account\">"
 		+"</form><br>";
@@ -59,7 +59,6 @@ function login(){
 		console.log(r);
 		if (r.response == true){
 			// create a cookie
-			console.log(r)
 			document.cookie="auth="+r.cookie+";username="+r.usern+";";
 			document.cookie="username="+r.usern+";";
 			window.location.reload(true);

@@ -58,21 +58,31 @@ exports.delete_br = function(req, res) {
 
 
 exports.get_comments = function(req, res){
-	Br_Model.find(req.body, function(err, post){
+	Br_Model.findById(req.params.brId, function(err, br) {
 		if (err)
 			res.send(err);
-		res.json(post.comments);
+		res.json(br.comments);
 	});
 };
 
 exports.post_a_comment = function(req, res){
-	Br_Model.find(req.body, function(err, post){
+	Br_Model.findOne({_id: req.params.brId}, function(err, post){
 		if (err)
 			res.send(err);
-		potential_c = req.params
-		if (potential_c.stars > 5 || potential_c.stars < 1)
-			res.json(null);
-		post.comments.append(potential_c);
-		res.json(post.comments);
+		var potential_c = req.body
+		if (potential_c.stars > 5 || potential_c.stars < 1){
+			res.json({response:false, reason:"Invalid number of stars"});
+			return
+		}
+		post.comments.push(potential_c);
+		var star_tot = 0;
+		for (var i = 0; i < post.comments.length; i++){
+			if ( post.comments[i].stars != undefined){
+			var star_tot = star_tot + post.comments[i].stars;
+		}
+		if ( post.comments.length != 0 )
+			post.stars = star_tot / post.comments.length
+		post.save();
+		res.json({response:true});
 	});
 };

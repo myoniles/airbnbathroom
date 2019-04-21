@@ -17,6 +17,10 @@ module.exports = function(app) {
 		.get( function(req, res){
 			res.sendFile( '/home/mike/airbnbathroom/web/google_map.js');
 		});
+	app.route('/user.js')
+		.get( function(req, res){
+			res.sendFile( '/home/mike/airbnbathroom/web/user.js');
+		});
 	app.route('/style.css')
 		.get( function(req, res){
 			res.sendFile( '/home/mike/airbnbathroom/web/style.css');
@@ -49,4 +53,5 @@ module.exports = function(app) {
 	// Users
 	app.route('/users/')
 		.post(user_controller.register_user)
+		.put(user_controller.login)
 }

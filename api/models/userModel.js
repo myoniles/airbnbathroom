@@ -7,7 +7,8 @@ var User_Model = new Schema({
 	username: {
 		type: String,
 		required: 'Select a username',
-		unqiue: true
+		unqiue: true,
+		dropDups: true
 	},
 	password: {
 		type: String,

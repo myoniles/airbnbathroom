@@ -40,6 +40,8 @@ function initMap() {
 			position: event.latLng,
 			map: map,
 		});
+		document.getElementById("add_lat").value = event.latLng.lat();
+		document.getElementById("add_lng").value = event.latLng.lng();
 	});
 }
 

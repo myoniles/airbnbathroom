@@ -3,15 +3,11 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 var SALT_FACTOR = 10; // Using Zach when he's playing league is too much salt
 
-var UserSchema = new Schema({
-	email: {
-		type: String,
-		required: 'Insert an email',
-		verified: { type: Boolean, default: false }
-	},
+var User_Model = new Schema({
 	username: {
 		type: String,
-		required: 'Select a username'
+		required: 'Select a username',
+		unqiue: true
 	},
 	password: {
 		type: String,
@@ -24,7 +20,7 @@ var UserSchema = new Schema({
 // This method of salting and hashing is copied almost directly from
 // the one found on mondodb.org:
 // https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
-UserSchema.pre('save', function(next) {
+User_Model.pre('save', function(next) {
 	var user = this;
 
 	// only hash if passwrd is new
@@ -40,7 +36,6 @@ UserSchema.pre('save', function(next) {
 			next();
 		});
 	});
-
 });
 
-module.exports = mongoose.model('Users', UserSchema);
+module.exports = mongoose.model('User_Model', User_Model);

@@ -34,7 +34,10 @@
 				<input type="submit" value="Refine Search">
 			</form><hr>
 			<h3>Add New Bathroom</h3>
-			<form>
+			<form method="post" action="/bathrooms/">
+				<p>Name: <input type="text" name="name" maxlength=20></p>
+				<input name="lat" type="hidden" id="add_lat">
+				<input name="lng" type="hidden" id="add_lng">
 				<p>Gender:
 					Male: <input type="checkbox" name="gender" value="Male">
 					Female: <input type="checkbox" name="gender" value="Female">

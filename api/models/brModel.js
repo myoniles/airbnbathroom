@@ -9,7 +9,7 @@ var Br_Model = new Schema({
 	},
 	lat: {type:Number, required: true, unique: true, dropDups: true},
 	lng: {type:Number, required: true, unique: true, dropDups: true},
-	gender: { type: String, default:'Not Specified'},
+	gender: [String],
 	comments: [ {body: String, stars:Number, user: String, posted: Date}],
 	open_t: Number,
 	close_t: Number,

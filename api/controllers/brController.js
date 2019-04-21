@@ -65,6 +65,11 @@ exports.get_comments = function(req, res){
 	});
 };
 
+function my_round(n, p){
+	p = Math.pow(10, p);
+	return Math.round(n*p) / p
+}
+
 exports.post_a_comment = function(req, res){
 	Br_Model.findOne({_id: req.params.brId}, function(err, post){
 		if (err)
@@ -81,7 +86,7 @@ exports.post_a_comment = function(req, res){
 			var star_tot = star_tot + post.comments[i].stars;
 		}
 		if ( post.comments.length != 0 )
-			post.stars = star_tot / post.comments.length
+			post.stars = my_round(star_tot / post.comments.length, 1)
 		post.save();
 		res.json({response:true});
 	});

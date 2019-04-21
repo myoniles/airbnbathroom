@@ -118,12 +118,18 @@ function gen_info( id ){
 		if (br_obj.comments.length ==0 ){
 			info_obj.children.comments.innerHTML = '<p>Sorry, No Comments Here!</p>'
 		} else {
-			for (var i = 0; i < br_obj.comments.length; i++){
+			info_obj.children.comments.innerHTML = ''
+			for (var i = br_obj.comments.length-1; i >= 0;  i--){
 				// build the div
 				// append to the document
 				comment_div = document.createElement('div');
 				comment_div.className = 'comment';
-				commenthtml = '<p color=#1e1e1e> heck' + '</p>'
+				commenthtml = '<h6 color=#7f3fff>' + br_obj.comments[i].user
+				+ " | " + br_obj.comments[i].stars + " stars"
+				+'</h3>'
+				+'<p>'+br_obj.comments[i].body +'</p>';
+				comment_div.innerHTML = commenthtml;
+				info_obj.children.comments.appendChild(comment_div);
 			}
 		}
 

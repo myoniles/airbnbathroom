@@ -34,6 +34,62 @@ function login_prompt(){
 	document.getElementById("login").innerHTML = inner;
 }
 
+function user_comment_prompt(){
+	var user = getCookie("auth");
+	var name = getCookie("username");
+	var inner ="";
+	if (user == ""){
+		inner = "<p><a href="/">Login</a> to comment and rate this bathroom!<p/>";
+	} else {
+		inner = "<form>"
+		+"<h3>Add a Comment</h3>"
+		+"<input type=\"text\" id=\"comment_body\" name=\"username\" maxlength=140>"
+		+"<select id=\"comment_stars\" name='stars'>"
+		+"<option value=\"\" selected disabled hidden>-</option>"
+		+"<option value='1'>1</option>"
+		+"<option value='2'>2</option>"
+		+"<option value='3'>3</option>"
+		+"<option value='4'>4</option>"
+		+"<option value='5'>5</option>"
+		+"</select>"
+		+"<input type=\"button\" onclick=\"publish_comment()\" value=\"Post Comment as "+ name +"\">"
+		+"</form><br>";
+	}
+	document.getElementById("user_comment").innerHTML = inner;
+}
+
+function get_br_id(){
+	args = window.location.href.split('id=')
+	if ( args.length == 1 ){
+		return null;
+	} else {
+		return args[1];
+	}
+}
+
+function publish_comment(){
+	var request = new XMLHttpRequest();
+	var stars = document.getElementById("comment_stars").value;
+	var name = getCookie("username");
+	var comment_body =document.getElementById("comment_body").value;
+	request.open('PUT', '/bathroom/'+ get_br_id()+'/comments/', true);
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	request.onload = function(){
+		console.log(request.responseText);
+		r = JSON.parse(request.responseText);
+		// Whether the comment was successfully posted is handled serverside
+		console.log(r)
+		if (r.response == true){
+			//window.location.reload(true);
+			window.location.href = window.location.href;
+		} else {
+			document.getElementById("comment_body").value = "Error. Could not verify login credentials.";
+		}
+	}
+	args= "body="+comment_body+"&user="+name+"&stars="+stars;
+	request.send(args);
+}
+
 function create_user(){
 	var usern = document.getElementById("username_entry");
 	var passwd = document.getElementById("password_entry");
@@ -56,7 +112,6 @@ function login(){
 	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	request.onload = function(){
 		r = JSON.parse(request.responseText);
-		console.log(r);
 		if (r.response == true){
 			// create a cookie
 			document.cookie="auth="+r.cookie+";username="+r.usern+";";

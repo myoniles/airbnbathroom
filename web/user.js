@@ -39,7 +39,7 @@ function user_comment_prompt(){
 	var name = getCookie("username");
 	var inner ="";
 	if (user == ""){
-		inner = "<p><a href="/">Login</a> to comment and rate this bathroom!<p/>";
+		document.getElementById("user_comment").innerHTML = "<p><a href=\"\/\">Login</a> to comment and rate this bathroom!"
 	} else {
 		inner = "<form>"
 		+"<h3>Add a Comment</h3>"
@@ -54,8 +54,8 @@ function user_comment_prompt(){
 		+"</select>"
 		+"<input type=\"button\" onclick=\"publish_comment()\" value=\"Post Comment as "+ name +"\">"
 		+"</form><br>";
+		document.getElementById("user_comment").innerHTML = inner;
 	}
-	document.getElementById("user_comment").innerHTML = inner;
 }
 
 function get_br_id(){
@@ -78,7 +78,6 @@ function publish_comment(){
 		console.log(request.responseText);
 		r = JSON.parse(request.responseText);
 		// Whether the comment was successfully posted is handled serverside
-		console.log(r)
 		if (r.response == true){
 			//window.location.reload(true);
 			window.location.href = window.location.href;
@@ -91,8 +90,8 @@ function publish_comment(){
 }
 
 function create_user(){
-	var usern = document.getElementById("username_entry");
-	var passwd = document.getElementById("password_entry");
+	var usern = document.getElementById("username_entry").value;
+	var passwd = document.getElementById("password_entry").value;
 	// need to make a request to the server, it will return an error
 	// if it is a duplicate
 
@@ -101,7 +100,19 @@ function create_user(){
 	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	request.onload = function(){
 		r = JSON.parse(request.responseText);
+		if (r.response == true){
+
+			// create a cookie
+			document.cookie="auth="+r.cookie+";username="+r.usern+";";
+			document.cookie="username="+r.usern+";";
+			window.location.reload(true);
+		} else {
+			document.getElementById("username_entry").style.backgroundColor = "red";
+			document.getElementById("password_entry").style.backgroundColor = "red";
+		}
 	}
+	ags= "username="+usern+"&password="+passwd
+	request.send(ags);
 }
 
 function login(){

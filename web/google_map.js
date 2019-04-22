@@ -180,7 +180,8 @@ function create_br(){
 		console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText)
 		if (res._id){
-			window.location.href = window.location.href+"br.html?id="+res._id;
+			var urls = window.location.href.split("?");
+			window.location.href = "http://yoniles.com:3000/br.html?id="+res._id;
 		}
 	}
 	xhr.send(x_encod);

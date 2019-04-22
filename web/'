@@ -6,12 +6,11 @@ var monggoose = require('mongoose'),
 	User_model = mongoose.model('User_Model')
 
 exports.register_user = function(req, res) {
+	console.log
 	var new_user = new User_model(req.body);
 	new_user.save(function(err,post){
-		if (err){
-			console.log(err);
+		if (err)
 			res.json({response: false});
-		}
 		else
 			res.json({response: true, cookie:post._id, usern: post.username});
 	});

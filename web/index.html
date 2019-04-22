@@ -7,16 +7,17 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="google_map.js"></script>
+		<script src="user.js"></script>
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<center><h1>AirBNBathroom</h1></center>
+		<center><a href="/"><h1>AirBNBathroom</h1></a></center>
 		<hr><hr>
 		<div id="map"></div>
 		<div class="menu">
 			<h3>Search</h3>
 			<form>
-				<p>Minimum stars:
+				<p>Stars:
 				<select name='stars'>
 					<option value="" selected disabled hidden>-</option>
 					<option value='1'>1</option>
@@ -25,24 +26,65 @@
 					<option value='4'>4</option>
 					<option value='5'>5</option>
 				</select></p>
+				<p>Type of bathroom:
+				<select name='social_obligation'>
+					<option value="" selected disabled hidden>-</option>
+					<option value='Public'>Public</option>
+					<option value='Private'>Private</option>
+					<option value='Purchase'>Purchase</option>
+				</select></p>
 				<p>Gender:
 					Male: <input type="checkbox" name="gender" value="Male">
 					Female: <input type="checkbox" name="gender" value="Female">
 					Gender Neutral: <input type="checkbox" name="gender" value="Gender Neutral">
 				</p>
-				<p>Has a Diaper changing station: yes: <input name= 'diaper' value='true' type="radio"> no: <input name= 'diaper' value='false' type="radio"></p>
+				<p>Toilet Paper Ply:
+				<select name='tp_ply'>
+					<option value="" selected disabled hidden>-</option>
+					<option value='1'>1</option>
+					<option value='2'>2</option>
+					<option value='3'>3</option>
+					<option value='4'>4</option>
+					<option value='5'>5</option>
+					<option value='6'>6</option>
+				</select></p>
+				<p>Has a Diaper changing station: <input name= 'diaper' value='true' type="checkbox"> </p>
+				<p>Feminine Products: <input name= 'fem_p' value='true' type="checkbox"></p>
 				<input type="submit" value="Refine Search">
 			</form><hr>
 			<h3>Add New Bathroom</h3>
-			<form>
+			<form id="create_br_form">
+				<p>Name: <input type="text" name="name" maxlength=50></p>
+				<input name="lat" type="hidden" id="add_lat">
+				<input name="lng" type="hidden" id="add_lng">
+				</select></p>
+				<p>Type of bathroom:
+				<select name='social_obligation'>
+					<option value="" selected disabled hidden>-</option>
+					<option value='Public'>Public</option>
+					<option value='Private'>Private</option>
+					<option value='Purchase'>Purchase</option>
+				</select></p>
 				<p>Gender:
 					Male: <input type="checkbox" name="gender" value="Male">
 					Female: <input type="checkbox" name="gender" value="Female">
 					Gender Neutral: <input type="checkbox" name="gender" value="Gender Neutral">
 				</p>
-				<p>Has a Diaper changing station: yes: <input name= 'diaper' value='true' type="radio"> no: <input name= 'diaper' value='false' type="radio"></p>
-				<input type="submit" value="Add Bathroom at current marker location">
+				<p>Toilet Paper Ply:
+				<select name='tp_ply'>
+					<option value="" selected disabled hidden>-</option>
+					<option value='1'>1</option>
+					<option value='2'>2</option>
+					<option value='3'>3</option>
+					<option value='4'>4</option>
+					<option value='5'>5</option>
+					<option value='6'>6</option>
+				</select></p>
+				<p>Has a Diaper changing station: <input name= 'diaper' value='true' type="checkbox"> </p>
+				<p>Feminine Products: <input name= 'fem_p' value='true' type="checkbox"></p>
+				<input type="button" onclick="create_br()" value="Add Bathroom at current marker location">
 			</form><hr>
+			<div id = "login"><script>login_prompt()</script></div>
 		</div>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9HKstTbYigEqf8DNuKn447R1BaDfcSb4&callback=initMap"></script>
 	</body>

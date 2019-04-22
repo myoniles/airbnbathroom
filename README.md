@@ -25,25 +25,25 @@ As of the planning stage, I intend to use nodejs, angular?, the google maps api,
 		- Male, Female, Unisex
 		- Diaper station
 		- Toilet paper ply
+		- Feminine products
 		- Social Obligation to use
+	- Rating and reviews of bathrooms
+		- Rating on a 5 star scale
+		- Comment of 140 characters
 
 - Google Maps integration
 	- with search criteria
 
+- User Accounts?
+	- Username
+	- If you think I am qualified or willing to securely manage passwords and/or payments for a 2 week project, you are severely mistaken
+
 ## In Progress
 
 - Posting of bathrooms
-	- Rating and reviews of bathrooms
-		- Rating on a 5 star scale
-		- Comment of 140 characters
 	- ~~Combine at a building level?~~
 
-- User Accounts?
-	- Username
-	- If you think I am qualified or willing to securely manage ~~passwords and/or~~ payments for a 2 week project, you are severely mistaken
+# Dev Notes
 
-## Known Issues
-
-- encryption happens server-side
-	- I store hashed and salted passwords but I cannot find a script that does not also require me sening an unhashed password to some server (even if it is google's).
-
+Once again I am reminded how privileged I am.
+It did not occur to me to track whether bathrooms included feminine product dispensers.

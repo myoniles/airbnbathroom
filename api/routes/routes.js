@@ -3,28 +3,32 @@
 
 module.exports = function(app) {
 	var bnbr_controller = require('../controllers/brController')
+	var user_controller = require('../controllers/userController')
 
 	app.route('/')
 		.get( function(req, res){
-			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/index.html');
+			res.sendFile( '/home/mike/airbnbathroom/web/index.html');
 		});
 	app.route('/br.html')
 		.get( function(req, res){
-			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/br.html');
+			res.sendFile( '/home/mike/airbnbathroom/web/br.html');
 		});
 	app.route('/google_map.js')
 		.get( function(req, res){
-			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/google_map.js');
+			res.sendFile( '/home/mike/airbnbathroom/web/google_map.js');
+		});
+	app.route('/user.js')
+		.get( function(req, res){
+			res.sendFile( '/home/mike/airbnbathroom/web/user.js');
 		});
 	app.route('/style.css')
 		.get( function(req, res){
-			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/style.css');
+			res.sendFile( '/home/mike/airbnbathroom/web/style.css');
 		});
 	app.route('/toilets_inclusive.png')
 		.get( function(req, res){
-			res.sendFile( '/home/mike/Documents/proj/airbnbathroom/web/toilets_inclusive.png');
+			res.sendFile( '/home/mike/airbnbathroom/web/toilets_inclusive.png');
 		});
-
 
 	// Routes for a specific bathroom
 	app.route('/bathroom/:brId')
@@ -45,4 +49,9 @@ module.exports = function(app) {
 	app.route('/bathroom/:brId/comments')
 		.get(bnbr_controller.get_comments)
 		.put(bnbr_controller.post_a_comment)
+
+	// Users
+	app.route('/users/')
+		.post(user_controller.register_user)
+		.put(user_controller.login)
 }

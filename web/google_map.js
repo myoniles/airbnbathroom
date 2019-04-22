@@ -40,6 +40,8 @@ function initMap() {
 			position: event.latLng,
 			map: map,
 		});
+		document.getElementById("add_lat").value = event.latLng.lat();
+		document.getElementById("add_lng").value = event.latLng.lng();
 	});
 }
 
@@ -116,12 +118,18 @@ function gen_info( id ){
 		if (br_obj.comments.length ==0 ){
 			info_obj.children.comments.innerHTML = '<p>Sorry, No Comments Here!</p>'
 		} else {
-			for (var i = 0; i < br_obj.comments.length; i++){
+			info_obj.children.comments.innerHTML = ''
+			for (var i = br_obj.comments.length-1; i >= 0;	i--){
 				// build the div
 				// append to the document
 				comment_div = document.createElement('div');
 				comment_div.className = 'comment';
-				commenthtml = '<p color=#1e1e1e> heck' + '</p>'
+				commenthtml = '<h6 color=#7f3fff>' + br_obj.comments[i].user
+				+ " | " + br_obj.comments[i].stars + " stars"
+				+'</h3>'
+				+'<p>'+br_obj.comments[i].body +'</p>';
+				comment_div.innerHTML = commenthtml;
+				info_obj.children.comments.appendChild(comment_div);
 			}
 		}
 
@@ -146,4 +154,35 @@ function get_all_br( map_obj ){
 	else
 		request.send();
 	console.log(args)
+}
+
+// shamelessly stolen from https://stackoverflow.com/questions/7542586/new-formdata-application-x-www-form-urlencoded
+function urlencodeFormData(fd){
+	var s = '';
+	function encode(s){ return encodeURIComponent(s).replace(/%20/g,'+'); }
+	for(var pair of fd.entries()){
+			if(typeof pair[1]=='string'){
+					s += (s?'&':'') + encode(pair[0])+'='+encode(pair[1]);
+			}
+	}
+	return s;
+}
+
+function create_br(){
+	var frm = document.getElementById('create_br_form');
+	var frmdata = new FormData(frm);
+	var x_encod = urlencodeFormData(frmdata);
+	console.log(frmdata);
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/bathrooms/', true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.onload = function(){
+		console.log(xhr.responseText);
+		var res = JSON.parse(xhr.responseText)
+		if (res._id){
+			var urls = window.location.href.split("?");
+			window.location.href = "http://yoniles.com:3000/br.html?id="+res._id;
+		}
+	}
+	xhr.send(x_encod);
 }

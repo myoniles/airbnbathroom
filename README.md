@@ -40,8 +40,10 @@ As of the planning stage, I intend to use nodejs, angular?, the google maps api,
 
 - User Accounts?
 	- Username
-	- If you think I am qualified or willing to securely manage passwords and/or payments for a 2 week project, you are severely mistaken
+	- If you think I am qualified or willing to securely manage ~~passwords and/or~~ payments for a 2 week project, you are severely mistaken
 
-- Google Maps integration
-	- See nearest bathrooms
-		- with search criteria
+## Known Issues
+
+- encryption happens server-side
+	- I store hashed and salted passwords but I cannot find a script that does not also require me sening an unhashed password to some server (even if it is google's).
+

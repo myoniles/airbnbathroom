@@ -13,7 +13,6 @@ function getCookie(cname) {
 	return "";
 }
 
-
 function login_prompt(){
 	var inner ="";
 	var user = getCookie("auth");
@@ -32,6 +31,33 @@ function login_prompt(){
 		inner = "<p>Hello, " + name + "<p/>";
 	}
 	document.getElementById("login").innerHTML = inner;
+}
+
+function login_header(){
+	var inner ="";
+	var user = getCookie("auth");
+	var name = getCookie("username");
+	if ( user == ""){
+		inner = "<form>"
+			+"Username:"
+			+"<input type=\"text\" id=\"username_entry\" name=\"username\" maxlength=20>"
+			+" Password:"
+			+"<input type=\"password\" id=\"password_entry\" name=\"password\" maxlength=20>"
+			+"<input type=\"button\" onclick=\"login()\" value=\"Log in\">"
+			+"<input type=\"button\" onclick=\"create_user()\" value=\"Create Account\">"
+		+"</form><br>";
+		document.getElementById("login_header").innerHTML = inner;
+	} else {
+		inner = "Hello, " + name
+		+" <input type=\"button\" onclick=\"logout()\" value=\"Logout\">";
+		document.getElementById("login_header").innerHTML = inner;
+	}
+}
+
+function logout(){
+		document.cookie="auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+		document.cookie="username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+		window.location.reload(true);
 }
 
 function user_comment_prompt(){
@@ -103,7 +129,7 @@ function create_user(){
 		if (r.response == true){
 
 			// create a cookie
-			document.cookie="auth="+r.cookie+";username="+r.usern+";";
+			document.cookie="auth="+r.cookie;
 			document.cookie="username="+r.usern+";";
 			window.location.reload(true);
 		} else {

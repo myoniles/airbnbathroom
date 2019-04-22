@@ -14,7 +14,7 @@ function initMap() {
 			a = JSON.parse(request.responseText);
 			console.log(a);
 			var center_loc= { lat:a.lat, lng: a.lng};
-			var zoom_init = 18;
+			var zoom_init = 20;
 			map = new google.maps.Map(document.getElementById('map'),{
 			center: center_loc,
 			zoom: zoom_init
@@ -91,7 +91,7 @@ function gen_info( id ){
 	request.onload = function(){
 		console.log(request.responseText);
 		br_obj = JSON.parse(request.responseText);
-		info_obj = document.getElementById("info")
+		info_obj = document.getElementById("drawer")
 
 		// add the needed information
 		// build the info string

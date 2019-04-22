@@ -29,6 +29,8 @@ exports.get_all_br_info = function(req, res) {
 };
 
 exports.search_br = function(req, res) {
+	if (req.body.stars)
+		req.body.stars = { $gt: req.body.stars};
 	Br_Model.find(req.body, function(err, post){
 		if (err)
 			res.send(err);

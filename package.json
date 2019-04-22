@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/myoniles/airbnbathroom/issues"
   },
-  "homepage": "https://github.com/myoniles/airbnbathroom#readme"
+  "homepage": "https://github.com/myoniles/airbnbathroom#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
 }

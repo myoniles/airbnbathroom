@@ -10,16 +10,19 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<center><a href="/"><h1>AirBNBathroom</h1></a></center>
+		<input hidden type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+		<label for="drawer-toggle" id="drawer-toggle-label"></label>
+		<header>AirBNBathroom</header>
 		<hr><hr>
-		<div id="map" height=50%></div>
+		<div id="map" ></div>
 		<script>
 			args = window.location.href.split('id=')
 			if (args.length > 1){
 				gen_info( args[1]);
 			}
 		</script>
-		<div id="info" >
+		<!-- <div id="info" > -->
+		<div id="drawer" >
 			<div id="br_info">
 			<p>This bathroom does not exist partner</p>
 			</div>

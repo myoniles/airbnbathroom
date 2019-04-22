@@ -11,10 +11,12 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<center><a href="/"><h1>AirBNBathroom</h1></a></center>
+		<input hidden type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+		<label for="drawer-toggle" id="drawer-toggle-label"></label>
+		<header>AirBNBathroom</header>
 		<hr><hr>
 		<div id="map"></div>
-		<div class="menu">
+		<nav id="drawer" class="menu">
 			<h3>Search</h3>
 			<form>
 				<p>Stars:
@@ -85,7 +87,7 @@
 				<input type="button" onclick="create_br()" value="Add Bathroom at current marker location">
 			</form><hr>
 			<div id = "login"><script>login_prompt()</script></div>
-		</div>
+		</nav>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9HKstTbYigEqf8DNuKn447R1BaDfcSb4&callback=initMap"></script>
 	</body>
 </html>

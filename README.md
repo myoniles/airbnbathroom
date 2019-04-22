@@ -25,23 +25,25 @@ As of the planning stage, I intend to use nodejs, angular?, the google maps api,
 		- Male, Female, Unisex
 		- Diaper station
 		- Toilet paper ply
+		- Feminine products
 		- Social Obligation to use
-
-- Google Maps integration
-	- with search criteria
-
-## In Progress
-
-- Posting of bathrooms
 	- Rating and reviews of bathrooms
 		- Rating on a 5 star scale
 		- Comment of 140 characters
-	- ~~Combine at a building level?~~
+
+- Google Maps integration
+	- with search criteria
 
 - User Accounts?
 	- Username
 	- If you think I am qualified or willing to securely manage passwords and/or payments for a 2 week project, you are severely mistaken
 
-- Google Maps integration
-	- See nearest bathrooms
-		- with search criteria
+## In Progress
+
+- Posting of bathrooms
+	- ~~Combine at a building level?~~
+
+# Dev Notes
+
+Once again I am reminded how privileged I am.
+It did not occur to me to track whether bathrooms included feminine product dispensers.

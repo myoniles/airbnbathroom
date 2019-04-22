@@ -119,7 +119,7 @@ function gen_info( id ){
 			info_obj.children.comments.innerHTML = '<p>Sorry, No Comments Here!</p>'
 		} else {
 			info_obj.children.comments.innerHTML = ''
-			for (var i = br_obj.comments.length-1; i >= 0;  i--){
+			for (var i = br_obj.comments.length-1; i >= 0;	i--){
 				// build the div
 				// append to the document
 				comment_div = document.createElement('div');
@@ -154,4 +154,34 @@ function get_all_br( map_obj ){
 	else
 		request.send();
 	console.log(args)
+}
+
+// shamelessly stolen from https://stackoverflow.com/questions/7542586/new-formdata-application-x-www-form-urlencoded
+function urlencodeFormData(fd){
+	var s = '';
+	function encode(s){ return encodeURIComponent(s).replace(/%20/g,'+'); }
+	for(var pair of fd.entries()){
+			if(typeof pair[1]=='string'){
+					s += (s?'&':'') + encode(pair[0])+'='+encode(pair[1]);
+			}
+	}
+	return s;
+}
+
+function create_br(){
+	var frm = document.getElementById('create_br_form');
+	var frmdata = new FormData(frm);
+	var x_encod = urlencodeFormData(frmdata);
+	console.log(frmdata);
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/bathrooms/', true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.onload = function(){
+		console.log(xhr.responseText);
+		var res = JSON.parse(xhr.responseText)
+		if (res._id){
+			window.location.href = window.location.href+"br.html?id="+res._id;
+		}
+	}
+	xhr.send(x_encod);
 }

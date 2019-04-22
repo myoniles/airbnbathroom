@@ -84,6 +84,7 @@ exports.post_a_comment = function(req, res){
 		for (var i = 0; i < post.comments.length; i++){
 			if ( post.comments[i].stars != undefined){
 			var star_tot = star_tot + post.comments[i].stars;
+			}
 		}
 		if ( post.comments.length != 0 )
 			post.stars = my_round(star_tot / post.comments.length, 1)

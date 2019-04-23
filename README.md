@@ -7,7 +7,7 @@ I hope you're okay with buying some arbitrary amount of product or food from a p
 
 Now using with the power of the ShARInG EcOnOMy$^{(tm)}$, you can share your life and your bathroom with strangers.
 
-# Registerig for CS252 Project
+# Registering for CS252 Project
 
 Michael Yoniles, myoniles@purdue.edu
 
